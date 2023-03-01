@@ -42,7 +42,7 @@ public static class CustomerEndpoints
 
         requestCustomer.Patch(customer);
         
-        return Results.Extensions.ODataQuery(customer);
+        return Results.Extensions.ODataUpdated(customer);
     }
 
     public static Results<BadRequest, ODataResult> UpdatePut(int id, ODataRequestBody<Delta<Customer>> request)
@@ -61,7 +61,7 @@ public static class CustomerEndpoints
 
         requestCustomer.Put(customer);
 
-        return Results.Extensions.ODataQuery(customer);
+        return Results.Extensions.ODataUpdated(customer);
     }
 
     public static Results<BadRequest, ODataResult> Create(ODataRequestBody<Customer> request)
@@ -79,7 +79,7 @@ public static class CustomerEndpoints
         };
         Customers.Add(customer);
 
-        return Results.Extensions.ODataQuery(customer);
+        return Results.Extensions.ODataCreated(customer);
     }
 
     public static Results<BadRequest, NoContent> Delete(int id)
@@ -99,10 +99,14 @@ public static class CustomerEndpoints
     {
         builder.MapGet("customers", GetAll);
         builder.MapGet("customers/{id:int}", Get);
+        builder.MapGet("customers({id:int})", Get);
         builder.MapPatch("customers/{id:int}", UpdatePatch);
+        builder.MapPatch("customers({id:int})", UpdatePatch);
         builder.MapPut("customers/{id:int}", UpdatePut);
+        builder.MapPut("customers({id:int})", UpdatePut);
         builder.MapPost("customers", Create);
         builder.MapDelete("customers/{id:int}", Delete);
+        builder.MapDelete("customers({id:int})", Delete);
 
         return builder;
     }

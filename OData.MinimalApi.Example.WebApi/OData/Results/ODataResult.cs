@@ -120,7 +120,7 @@ public class ODataResult : IResult, IEndpointMetadataProvider, IEndpointParamete
 
     public object? Result { get; set; }
 
-    public async Task ExecuteAsync(HttpContext httpContext)
+    public virtual async Task ExecuteAsync(HttpContext httpContext)
     {
         if (httpContext.GetEndpoint()?.Metadata.FirstOrDefault(o => o is ODataRoutingMetadata) is not
             ODataRoutingMetadata endPointMetaData)

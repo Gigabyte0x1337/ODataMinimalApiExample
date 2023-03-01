@@ -14,7 +14,7 @@ public class ODataCreatedResult : ODataResult
     {
     }
 
-    public new async Task ExecuteAsync(HttpContext httpContext)
+    public override async Task ExecuteAsync(HttpContext httpContext)
     {
         if (httpContext.GetEndpoint()?.Metadata.FirstOrDefault(o => o is ODataRoutingMetadata) is not
             ODataRoutingMetadata endPointMetaData)
